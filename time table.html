@@ -1,0 +1,211 @@
+[6:19 PM, 10/3/2024] umabhavya04: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Time Table Management</title>
+    <style>
+        
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 800px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+.role-selection {
+    margin-bottom: 20px;
+}
+
+.role-panel {
+    display: none;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+form {
+    margin-top: 10px;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+}
+
+input, select, textarea {
+    padding: 8px;
+    width: calc(100% - 160px);
+    margin-bottom: 10px;
+}
+
+#scheduleArea, #announcementArea, #attendanceArea {
+    display: none;
+    margin-top: 20px;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>College Time Table Management System</h1>
+    </header>
+
+    <div class="container">
+        <div class="role-selection">
+            <label for="role">Select Role:</label>
+            <select id="role" onchange="loadRole()">
+                <option value="admin">Admin</option>
+                <option value="faculty">Faculty</option>
+                <option value="student">Student</option>
+            </select>
+        </div>
+
+        <div id="adminPanel" class="role-panel">
+            <h2>Admin Panel</h2>
+            <button onclick="createSchedule()">Create Schedule</button>
+            <button onclick="makeAnnouncement()">Make Announcement</button>
+        </div>
+
+        <div id="facultyPanel" class="role-panel">
+            <h2>Faculty Panel</h2>
+            <button onclick="viewSchedule()">View Schedule</button>
+            <button onclick="trackAttendance()">Track Attendance</button>
+            <button onclick="syncCalendar()">Sync Calendar</button>
+        </div>
+
+        <div id="studentPanel" class="role-panel">
+            <h2>Student Panel</h2>
+            <button onclick="viewStudentSchedule()">View Schedule</button>
+            <button onclick="syncStudentCalendar()">Sync Calendar</button>
+        </div>
+
+        <div id="scheduleArea">
+            <h3>Schedule Creation</h3>
+            <form id="scheduleForm">
+                <label for="course">Course:</label>
+                <input type="text" id="course" placeholder="Enter course name"><br>
+                <label for="faculty">Faculty:</label>
+                <input type="text" id="faculty" placeholder="Enter faculty name"><br>
+                <label for="day">Day:</label>
+                <input type="text" id="day" placeholder="Enter day"><br>
+                <label for="time">Time:</label>
+                <input type="text" id="time" placeholder="Enter time"><br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div id="announcementArea">
+            <h3>Make Announcement</h3>
+            <form id="announcementForm">
+                <label for="announcement">Announcement:</label>
+                <textarea id="announcement" placeholder="Enter your announcement here"></textarea><br>
+                <button type="submit">Post Announcement</button>
+            </form>
+        </div>
+
+        <div id="attendanceArea">
+            <h3>Track Attendance</h3>
+            <!-- Attendance tracking form -->
+            <form id="attendanceForm">
+                <label for="student">Student Name:</label>
+                <input type="text" id="student" placeholder="Enter student name"><br>
+                <label for="courseAttendance">Course:</label>
+                <input type="text" id="courseAttendance" placeholder="Enter course"><br>
+                <label for="attendanceStatus">Attendance Status:</label>
+                <select id="attendanceStatus">
+                    <option value="present">Present</option>
+                    <option value="absent">Absent</option>
+                </select><br>
+                <button type="submit">Submit Attendance</button>
+            </form>
+        </div>
+    </div>
+
+    <script> 
+        function loadRole() {
+    const role = document.getElementById('role').value;
+    
+    document.getElementById('adminPanel').style.display = 'none';
+    document.getElementById('facultyPanel').style.display = 'none';
+    document.getElementById('studentPanel').style.display = 'none';
+
+    if (role === 'admin') {
+        document.getElementById('adminPanel').style.display = 'block';
+    } else if (role === 'faculty') {
+        document.getElementById('facultyPanel').style.display = 'block';
+    } else if (role === 'student') {
+        document.getElementById('studentPanel').style.display = 'block';
+    }
+}
+
+function createSchedule() {
+    document.getElementById('scheduleArea').style.display = 'block';
+    document.getElementById('announcementArea').style.display = 'none';
+    document.getElementById('attendanceArea').style.display = 'none';
+}
+
+function makeAnnouncement() {
+    document.getElementById('scheduleArea').style.display = 'none';
+    document.getElementById('announcementArea').style.display = 'block';
+    document.getElementById('attendanceArea').style.display = 'none';
+}
+
+function trackAttendance() {
+    document.getElementById('scheduleArea').style.display = 'none';
+    document.getElementById('announcementArea').style.display = 'none';
+    document.getElementById('attendanceArea').style.display = 'block';
+}
+
+function syncCalendar() {
+    alert('Calendar synced for faculty!');
+}
+
+function viewSchedule() {
+    alert('Viewing faculty schedule.');
+}
+
+function syncStudentCalendar() {
+    alert('Calendar synced for student!');
+}
+
+function viewStudentSchedule() {
+    alert('Viewing student schedule.');
+}
+    </script>
+</body>
+</html>
